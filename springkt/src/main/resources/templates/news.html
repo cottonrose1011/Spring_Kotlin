@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"><title>뉴스</title>
+</head>
+<body>
+<form method="POST">
+    <input name="txt" /><button type="submit">추가</button>
+</form>
+<ul>
+    <li th:each="news : ${newsList}">
+        <span th:text="${news}"></span>
+    </li>
+</ul>
+</body>
+</html>
