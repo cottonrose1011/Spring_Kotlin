@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>학생 정보 목록</title>
+    <style>
+        table { border: 1px solid black; }
+        th, td {
+            border: 1px solid;
+            padding: 8px
+        }
+    </style>
+</head>
+<body>
+<form method="POST" action="/stud">
+    <label>학번: <input type="number" name="id"/></label><br>
+    <label>이름: <input type="text" name="name"/></label><br>
+    <label>나이: <input type="number" name="age"/></label><br>
+    <label>상태: <select name="enroll">
+        <option value="재학">재학</option>
+        <option value="휴학">휴학</option>
+    </select></label><br>
+    <label>점수: <input type="number" name="score"/></label><br>
+    <br>
+    <button type="submit">추가</button>
+</form>
+<br>
+<hr>
+<br>
+<table>
+    <thead>
+    <tr>
+        <th>학번</th>
+        <th>이름</th>
+        <th>나이</th>
+        <th>상태</th>
+        <th>점수</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="student : ${students}">
+        <td th:text="${student.id}"></td>
+        <td th:text="${student.name}"></td>
+        <td th:text="${student.age}"></td>
+        <td th:text="${student.enroll}"></td>
+        <td th:text="${student.score}"></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

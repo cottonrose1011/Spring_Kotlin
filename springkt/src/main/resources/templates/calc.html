@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <Itle>계산기</Itle>
+</head>
+<body>
+<h1>덧셈 계산기</h1>
+<form method="POST" acIon="/">
+  <input type="number" name="num1" th:value="${num1}"/>
+  <span> + </span>
+  <input type="number" name="num2" th:value="${num2}"/>
+  <button type="submit">계산</button>
+</form>
+<br><br><br>
+<div>계산 결과는 <mark th:text="${result ?: 0}"></mark> 입니다.</div>
+</body>
+</html>
