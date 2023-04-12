@@ -1,16 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8"><title>뉴스</title>
-</head>
+<head><meta charset="UTF-8"><title>뉴스</title></head>
 <body>
 <form method="POST">
-    <input name="txt" /><button type="submit">추가</button>
+    <label>제목: <input name="title" placeholder="제목"/></label>
+    <label>주소: <input name="url" placeholder="주소" /></label>
+    <button type="submit">추가</button>
 </form>
 <ul>
-    <li th:each="news : ${newsList}">
-        <span th:text="${news}"></span>
+    <li th:each="news, newsState : ${newsList}">
+        <button class="btn_delete" th:data-idx="${newsState.index}">삭제</button>
+        <button class="btn_modify">수정</button>
+        <a th:text="${news.title}" th:href = "${news.address}"></a>
     </li>
 </ul>
+<script>
+    document.querySelectorAll('.btn_delete').forEach((e) => {
+        e.addEventListener('click', function (event) {
+            let idx = event.target.getAttribute("data-idx");
+
+            if (confirm("정말 삭제하시겠습니까?")) {
+                fetch(`/news/${idx}`, { method: "DELETE" }).then(function (response) {
+                    if (response.ok) {
+                        response.json().then((result) => {
+                            if (result) {
+                                alert("삭제되었습니다.");
+                                return location.reload();
+                            }
+                            alert('항목이 존재하지 않습니다.');
+                        })
+                    }
+                    else {
+                        alert("삭제에 실패했습니다.");
+                    }
+                });
+            }
+        })
+    })
+</script>
 </body>
 </html>

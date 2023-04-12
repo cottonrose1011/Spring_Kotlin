@@ -15,7 +15,7 @@ data class Student(
 
 val students = mutableListOf<Student>()
 
-@Controller
+
 class StudentController {
 
     @GetMapping("/")
