@@ -10,7 +10,7 @@
 <ul>
     <li th:each="news, newsState : ${newsList}">
         <button class="btn_delete" th:data-idx="${newsState.index}">삭제</button>
-        <button class="btn_modify">수정</button>
+        <button class="btn_modify" th:data-id="${newsState.index}">수정</button>
         <a th:text="${news.title}" th:href = "${news.address}"></a>
     </li>
 </ul>
@@ -35,6 +35,36 @@
                     }
                 });
             }
+        })
+    })
+
+    document.querySelectorAll('.btn_modify').forEach((ev) =>{
+        ev.addEventListener('click',function (event) {
+            let id = event.target.getAttribute("data-id")
+
+            fetch(`/news/${id}`, {
+                method: "PUT",
+                body: JSON.stringify({
+                    title: prompt("제목을 입력하세요."),
+                    address: prompt("주소를 입력하세요.")
+                }),
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            }).then(function (response) {
+                if (response.ok) {
+                    response.json().then((result) => {
+                        if (result) {
+                            alert("수정되었습니다.");
+                            location.reload();
+                            return;
+                        }
+                        alert('항목이 존재하지 않습니다.');
+                    })
+                } else {
+                    alert("수정에 실패했습니다.");
+                }
+            });
         })
     })
 </script>
