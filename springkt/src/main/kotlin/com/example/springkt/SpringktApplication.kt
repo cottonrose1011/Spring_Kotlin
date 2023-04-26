@@ -25,7 +25,7 @@ var news = mutableListOf(
 data class News(val title: String, val address: String)
 data class NewsAddRequest(val title: String, val address: String)
 data class NewsDTO (val title: String?, val address: String?)
-@Controller
+
 class HomeController {
 	@GetMapping("/")
 	fun home(model: Model): String {

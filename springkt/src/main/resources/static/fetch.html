@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <button class="btn-read">읽기</button>
+    <button id="btn_id">쓰기</button>
+    <hr>
+    <ul id="contents">
+
+    </ul>
+    <script>
+
+        document.querySelectorAll('.btn-read').forEach(function (element){
+            element.addEventListener('click', function (){
+                fetch('/api/')
+                    .then(function (resp) {
+                        if (!resp.ok){
+                            alert("요청에 실패했습니다")
+                        }
+
+                        return resp.json()
+
+                    }).then(function (json) {
+                        let container = document.getElementById("contents")
+                        container.innerHTML = '';
+                        let idx = 0
+
+                        json.map((e) => `<li>
+                            <button class="btn-delete" data-id="${idx++}">삭제</button>
+                            <a href="${e.address}"></a>${e.title}</li>`).forEach(function (html){
+                            container.innerHTML += html;
+                        })
+                        document.querySelectorAll('.btn-delete').forEach(function (element) {
+                            //Dom이 읽기 버튼을 누른 시점에서 나오는데 쿼리 샐럭터는 이벤트 핸들러가 끊어져서 안됨
+                            element.addEventListener('click', function (e){
+                                let idx = e.target.getAttribute("data-id")  //실제 클릭했던 돔이 들어옴
+
+                                fetch(`/api/${idx}`, {
+                                    method: 'DELETE',
+                                }).then(function (resp){
+                                    if (resp.ok){
+                                        return resp.json();
+                                    }
+                                }).then((json) => alert(json? "삭제되었습니다" : "삭제에 실패했습니다"))
+                            })
+                        })
+                })
+
+
+            })
+        })
+
+        document.getElementById("btn_id").addEventListener("click", function (){
+            let title = prompt("제목을 입력해주세요") // 밑줄 오류 제거
+            let address = prompt("주소를 입력해주세요")
+            fetch('/api/',{
+                method: "POST",
+                body: `title=${title}&address=${address}`,
+                headers: {
+                    'Content-Type' : 'application/x-www-form-urlencoded'
+                }
+            })
+        })
+
+
+    </script>
+</body>
+</html>
