@@ -1,4 +1,4 @@
-package com.example.springkt
+package com.example.springkt.controller
 
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model

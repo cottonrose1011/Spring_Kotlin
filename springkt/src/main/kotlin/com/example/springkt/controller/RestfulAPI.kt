@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody
 class RestfulAPI {
 
 }
+data class News(val title: String, val address: String)
 var news = mutableListOf(
     News("누리호 5월 24일 3차 발사…인공위성 8개 싣고 우주로",
         "https://n.news.naver.com/mnews/article/448/0000404277?sid=105"),
@@ -45,7 +46,7 @@ class RestfulAPIController{
         return true;
     }
 }
-data class News(val title: String, val address: String)
+
 data class NewsRequest(val title: String, val address: String)
 //Tomcat에서 파라미터를 바로 보내면 알아서 처리하지만 JSON은 따로 파싱을 해줘야
 //함. RequestBody 어노테이션을 해줌
