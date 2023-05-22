@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>글 쓰기</title>
+</head>
+<body>
+<h1>새로운 글 쓰기</h1>
+<form action="/write" method="post">
+    <label for="title">Title:</label><br>
+    <input type="text" id="title" name="title" required><br>
+    <label for="content">Content:</label><br>
+    <textarea id="content" name="content" required style="width: 80%; height: 400px"></textarea><br>
+    <input type="submit" value="Submit">
+</form>
+</body>
+</html>

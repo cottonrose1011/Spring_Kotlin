@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>글 읽기</title>
+</head>
+<body>
+<h1 th:text="${article.title}"></h1>
+<p th:text="${article.content}"></p>
+<hr>
+<div th:each="comment: ${comments}" style="margin: 8px 16px; padding-left: 8px; border-left: 1px solid gray;">
+    <p th:text="${comment.content}"></p>
+    <p th:text="${comment.created}"></p>
+</div>
+<form th:action="|/article/${article.id}/comment|" method="POST">
+    <h2>댓글 쓰기</h2>
+    <textarea id="content" name="content" required style="width: 80%; height: 100px"></textarea><br>
+    <input type="submit" value="Submit">
+</form>
+<hr>
+<a href="/"><button>목록으로</button></a>
+<button id="delete-btn">삭제</button>
+<script th:inline="javascript">
+    let article_id = [[${article.id}]];
+    document.getElementById("delete-btn").onclick = function () {
+        if (confirm("정말 삭제하시겠습니까?")) {
+            fetch(`/article/${article_id}`, {
+                method: "DELETE"
+            }).then(function (response) {
+                if (response.ok) {
+                    alert("삭제되었습니다.");
+                    window.location.href = "/";
+                } else {
+                    alert("삭제에 실패하였습니다.");
+                }
+            });
+        }
+    }
+</script>
+</body>
+</html>

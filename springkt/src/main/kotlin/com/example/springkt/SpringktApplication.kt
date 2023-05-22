@@ -33,7 +33,7 @@ interface NewsRepository : CrudRepository<NewsEntity, Int> {
 	fun findByTitleContainingIgnoreCaseOrAddressContainingIgnoreCase(title: String, address: String): List<NewsEntity>
 }
 
-@Controller
+//@Controller
 class MainController(@Autowired val newsRepository: NewsRepository){
 	@GetMapping("/")
 	fun index(model: Model) : String{
