@@ -49,6 +49,10 @@ class BoardPage ( @Autowired val postRepository: PostRepository)
 
         @GetMapping("/article/{id}")
         fun article(model: Model, @PathVariable id: Long): String{
+            val entityOptional = postRepository.findById(id)
+            if (entityOptional.isEmpty){
+                return "redirect:/"
+            }
             return "board_article"
         }
     }
