@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>회원가입</title>
+</head>
+<body>
+<h1>회원가입</h1>
+<div th:if="${error} != null" th:text="${error}" style="padding: 8px; background: red"></div>
+<form method="POST">
+    <label>아이디: <input name="username"></label><br>
+    <label>비밀번호: <input name="password" type="password"></label><br>
+    <label>이름: <input name="name"></label><br>
+    <button>저장</button>
+</form>
+</body>
+</html>

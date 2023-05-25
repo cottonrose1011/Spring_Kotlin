@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Session Pseudo</title>
+</head>
+<body>
+<h1>Session Pseudo</h1>
+<form method="POST">
+    <label>Key: <input name="key" /></label>
+    <label>Value: <input name="value" /></label>
+    <button>저장</button>
+</form>
+<ul>
+  <li th:each="sess : ${sess}" th:text="|${sess.first}: ${sess.second}|"></li>
+</ul>
+</body>
+</html>
