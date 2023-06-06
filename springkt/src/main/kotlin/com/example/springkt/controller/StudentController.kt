@@ -20,7 +20,7 @@ class StudentController {
 
     @GetMapping("/")
     fun index(model: Model) : String {
-    // Model 은 DicIonary 와 같은 형태로 Key-Value 형태로 데이터를 저장할 수 있다.
+    // Model 은 Dictionary 와 같은 형태로 Key-Value 형태로 데이터를 저장할 수 있다.
     // Model 에 학생 목록을 집어넣는다. (key: students, value: students)
         model.addAttribute("students", students)
         return "studentTable"

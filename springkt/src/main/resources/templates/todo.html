@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Todo List</title>
+</head>
+<body>
+    <h2>
+        TODO LIST
+    </h2>
+    <ul>
+        <li th:each="todos: ${todo}">
+            <span th:text="${todos}"></span>
+        </li>
+    </ul>
+    <form method="POST">
+        <label><input name="newTodo"></label>
+        <button type="submit">추가</button>
+    </form>
+
+</body>
+</html>
