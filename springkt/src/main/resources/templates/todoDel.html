@@ -15,11 +15,31 @@
         </li>
     </ul>
 
-    <button>삭제</button>
+    <button class="btn_delete" onclick="deleteChecked()">삭제</button>
+
 
     <form method="POST">
         <label><input name="newTodo"></label>
         <button type="submit">추가</button>
     </form>
 </body>
+<script>
+    function deleteChecked() {
+        var checkedbox = document.querySelectorAll('input[type="checkbox"]:checked')
+        var checkedIds = []
+
+        checkedbox.forEach(function (checkbox){
+            let idx = checkbox.getAttribute("data-todo-id")
+            checkedIds.push(idx)
+        })
+
+        checkedIds.forEach(() =>
+            fetch("/todo", {
+                method: 'DELETE',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify(checkedIds)})
+                .then(() => location.reload())
+        )
+    }
+</script>
 </html>
