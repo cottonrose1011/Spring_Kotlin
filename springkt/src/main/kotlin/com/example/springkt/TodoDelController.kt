@@ -13,7 +13,7 @@ var todoList = mutableListOf(
     Todo(count++,"회의")
 )
 
-@Controller
+//@Controller
 class TodoDelController {
 
     @GetMapping("/todo")

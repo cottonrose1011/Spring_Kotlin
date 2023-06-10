@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Todo List3</title>
+</head>
+<body>
+<h2>
+    TODO LIST3
+</h2>
+<ul>
+    <li th:each="todo: ${todoList}">
+        <input class="btn_done" type="checkbox" th:data-todo-id="${todo.id}" />
+        <span th:text="${todo.title}"></span>
+    </li>
+</ul>
+
+<button class="btn_delete" onclick="deleteChecked()">삭제</button>
+
+
+<form method="POST">
+    <label><input name="newTitle"></label>
+    <button type="submit">추가</button>
+</form>
+</body>
+<script>
+    function deleteChecked() {
+        var checkedbox = document.querySelectorAll('input[type="checkbox"]:checked')
+        var checkedIds = []
+
+        checkedbox.forEach(function (checkbox){
+            let idx = checkbox.getAttribute("data-todo-id")
+            checkedIds.push(idx)
+        })
+
+        checkedIds.forEach(() =>
+            fetch("/todo", {
+                method: 'DELETE',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify(checkedIds)})
+                .then(() => location.reload())
+        )
+    }
+</script>
+</html>
